@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>徐聪 ❤️ 江敏娇</title>
+  <style>
+    :root{
+      --bg1:#0f0c29;
+      --bg2:#302b63;
+      --bg3:#24243e;
+      --pink:#ff6fae;
+      --pink-2:#ff9fcb;
+      --white:#ffffff;
+      --glass: rgba(255,255,255,0.08);
+      --glass-border: rgba(255,255,255,0.14);
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+      --radius: 22px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--white);
+      min-height: 100vh;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(255,111,174,0.18), transparent 50%),
+                  radial-gradient(900px 500px at 90% 20%, rgba(255,159,203,0.16), transparent 55%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      overflow-x: hidden;
+    }
+
+    .glow{
+      position: fixed;
+      inset: 0;
+      pointer-events:none;
+      background:
+        radial-gradient(500px 500px at 20% 80%, rgba(255,111,174,0.12), transparent 60%),
+        radial-gradient(600px 600px at 80% 70%, rgba(255,159,203,0.10), transparent 60%);
+      filter: blur(10px);
+      z-index: 0;
+    }
+
+    /* 漂浮爱心 */
+    .hearts{
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events:none;
+      z-index: 1;
+    }
+    .heart{
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      transform: rotate(45deg);
+      opacity: 0.85;
+      animation: floatUp linear forwards;
+      filter: drop-shadow(0 0 6px rgba(255,111,174,0.35));
+    }
+    .heart::before,
+    .heart::after{
+      content:"";
+      position:absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: inherit;
+    }
+    .heart::before{left:-6px; top:0}
+    .heart::after{left:0; top:-6px}
+
+    @keyframes floatUp{
+      from{
+        transform: translateY(0) rotate(45deg) scale(0.9);
+        opacity: 0;
+      }
+      10%{opacity: .9}
+      to{
+        transform: translateY(-120vh) rotate(45deg) scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    .wrap{
+      position: relative;
+      z-index: 2;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 48px 18px 80px;
+    }
+
+    header{
+      display: grid;
+      gap: 18px;
+      justify-items: center;
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 34px;
+    }
+
+    .badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+    .badge-dot{
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      box-shadow: 0 0 10px rgba(255,111,174,0.8);
+    }
+
+    h1{
+      margin: 0;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .subtitle{
+      opacity: 0.85;
+      max-width: 42em;
+      line-height: 1.6;
+      font-size: clamp(14px, 2.2vw, 16px);
+    }
+
+    .type{
+      display: inline-block;
+      border-right: 2px solid rgba(255,255,255,0.6);
+      padding-right: 4px;
+      animation: caret 0.9s step-end infinite;
+    }
+    @keyframes caret{
+      50%{border-color: transparent}
+    }
+
+    /* 卡片通用 */
+    .card{
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .section{
+      display: grid;
+      gap: 14px;
+      margin: 18px 0 26px;
+    }
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .section-title .heart-icon{
+      width: 18px; height: 18px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      transform: rotate(45deg);
+      border-radius: 4px;
+      position: relative;
+      flex: 0 0 auto;
+    }
+    .section-title .heart-icon::before,
+    .section-title .heart-icon::after{
+      content:"";
+      position:absolute;
+      width: 18px; height: 18px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .section-title .heart-icon::before{left:-9px; top:0}
+    .section-title .heart-icon::after{left:0; top:-9px}
+
+    /* 文字区 */
+    .love-letter{
+      line-height: 1.75;
+      font-size: 15.5px;
+      opacity: 0.95;
+    }
+    .love-letter strong{
+      color: #ffd3e6;
+      font-weight: 700;
+    }
+
+    /* 纪念日计时 */
+    .counter{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 10px;
+    }
+    .counter-item{
+      text-align:center;
+      padding: 14px 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+    }
+    .counter-num{
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #fff, #ffd2e6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .counter-label{
+      font-size: 11px;
+      opacity: 0.75;
+      margin-top: 2px;
+    }
+    @media (max-width: 520px){
+      .counter{grid-template-columns: repeat(2, minmax(0,1fr));}
+    }
+
+    /* 相册 */
+    .avatars{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 520px){
+      .avatars{grid-template-columns: 1fr;}
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+    }
+    .photo{
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1.05;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+    }
+    .photo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.02);
+      transform: scale(1.01);
+      transition: transform .5s ease, filter .5s ease;
+    }
+    .photo:hover img{
+      transform: scale(1.06);
+      filter: saturate(1.2) contrast(1.05);
+    }
+    .photo .cap{
+      position:absolute;
+      left: 8px; right: 8px; bottom: 8px;
+      padding: 6px 8px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      font-size: 11px;
+      opacity: 0.95;
+      backdrop-filter: blur(6px);
+    }
+    @media (max-width: 720px){
+      .gallery{grid-template-columns: repeat(2, minmax(0,1fr));}
+    }
+
+    /* 列表/约定/故事 */
+    .list{
+      display:grid;
+      gap: 8px;
+      padding-left: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .list li{
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .list.clickable li{
+      cursor: pointer;
+      transition: transform .12s ease, background .2s ease, border-color .2s ease;
+    }
+    .list.clickable li:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    /* 按钮 */
+    .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 6px;
+    }
+    button{
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 700;
+      letter-spacing:.3px;
+      color: #1b0b14;
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      box-shadow: 0 8px 18px rgba(255,111,174,0.25);
+      transition: transform .12s ease, filter .2s ease, opacity .2s ease;
+    }
+    button.secondary{
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: none;
+      backdrop-filter: blur(10px);
+    }
+    button:hover{transform: translateY(-1px); filter: brightness(1.03);}
+    button:active{transform: translateY(1px); opacity: .9}
+
+    /* 音乐播放器 */
+    .music-row{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap: wrap;
+    }
+    .music-hint{
+      font-size: 12px;
+      opacity: 0.75;
+    }
+    audio{
+      width: min(480px, 100%);
+      border-radius: 12px;
+    }
+
+    /* 弹窗 */
+    .modal{
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(0,0,0,0.45);
+      z-index: 50;
+    }
+    .modal.show{display: grid;}
+    .modal-card{
+      width: min(520px, 100%);
+      text-align: center;
+      padding: 26px 22px 22px;
+    }
+    .modal-title{
+      font-size: 22px;
+      font-weight: 800;
+      margin: 4px 0 10px;
+    }
+    .modal-text{
+      line-height: 1.7;
+      opacity: .95;
+      font-size: 15px;
+      margin: 0 0 16px;
+    }
+
+    footer{
+      text-align:center;
+      opacity: 0.6;
+      font-size: 11px;
+      margin-top: 26px;
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="wrap">
+    <header>
+      <span class="badge"><span class="badge-dot"></span> 专属小站 · 只给你</span>
+      <h1>
+        <span id="titleType" class="type"></span>
+      </h1>
+      <div class="subtitle">
+        有些话当面说会紧张，所以我先偷偷写在这里。<br/>
+        你点开这一页的时候，希望你能笑一下。
+      </div>
+      <div class="actions">
+        <button id="btnSurprise">点我一下</button>
+        <button class="secondary" id="btnMoreHearts">爱心加倍</button>
+        <button class="secondary" id="btnQuote">抽一句</button>
+      </div>
+    </header>
+
+    <!-- 我想对你说 -->
+    <section class="section">
+      <div class="section-title">
+        <span class="heart-icon"></span>
+        <span>我想对你说</span>
+      </div>
+      <div class="card">
+        <div class="love-letter">
+          <p>
+            <strong>亲爱的江敏娇：</strong>
+            你是我生活里最温柔也最坚定的那束光。  
+            不管今天你开心还是有点累，我都希望你记得：
+            <strong>你值得被好好爱着，也值得被认真偏爱。</strong>
+          </p>
+          <p>
+            我可能不是最会说甜话的人，但我会一直学着
+            把喜欢落实到细节里，  
+            把在乎变成你能感受到的安心。
+          </p>
+          <p>
+            这页小小的网页不算什么，  
+            但它说的是同一件大事：  
+            <strong>我喜欢你，且一天比一天更确定。</strong>
+          </p>
+          <p style="margin-top:10px; opacity:.9;">
+            —— 你的 徐聪
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 音乐 -->
+    <section class="section">
+      <div class="section-title">
+        <span class="heart-icon"></span>
+        <span>我们的歌</span>
+      </div>
+      <div class="card">
+        <div class="subtitle" style="margin-bottom:10px;">
+          给这页加一点声音。你可以把她最喜欢的歌放到 GitHub 仓库里，然后在这里播放。
+        </div>
+        <div class="music-row">
+          <span class="music-hint">
+            进入页面将尝试自动播放（不同浏览器策略不同，若未自动响，轻触页面任意位置即可）。
+          </span>
+        </div>
+        <div style="margin-top:10px;">
+          <audio id="loveAudio" controls preload="metadata" autoplay loop>
+            <source src="love-song.mp3" type="audio/mpeg">
+            你的浏览器不支持音频播放。
+          </audio>
+        </div>
+      </div>
+    </section>
+
+    <!-- 我们的时间 -->
+    <section class="section">
+      <div class="section-title">
+        <span class="heart-icon"></span>
+        <span>我们的时间</span>
+      </div>
+      <div class="card">
+        <div class="subtitle" style="margin-bottom:12px;">
+          从 <strong id="startDateText"></strong> 开始，我们已经一起走过：
+        </div>
+        <div class="counter">
+          <div class="counter-item">
+            <div class="counter-num" id="days">0</div>
+            <div class="counter-label">天</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-num" id="hours">0</div>
+            <div class="counter-label">小时</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-num" id="minutes">0</div>
+            <div class="counter-label">分钟</div>
+          </div>
+          <div class="counter-item">
+            <div class="counter-num" id="seconds">0</div>
+            <div class="counter-label">秒</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 我们的故事 -->
+    <section class="section">
+      <div class="section-title">
+        <span class="heart-icon"></span>
+        <span>我们的故事</span>
+      </div>
+      <div class="card">
+        <div class="subtitle" style="margin-bottom:12px;">
+          把一些重要的节点做成小星星，点一下就能看到我想说的话。
+        </div>
+        <ul class="list clickable" id="storyList">
+          <li data-story="2016年9月，我们的故事开始有了名字。那时的我还不懂，原来‘喜欢’可以这么长久。">
+            2016.09 · 起点
+          </li>
+          <li data-story="谢谢你愿意和我一起把普通的日子，过成有光的日子。">
+            2018-2020 · 越来越笃定
+          </li>
+          <li data-story="无论世界多忙多吵，你一出现，我就安心。">
+            2021-2023 · 把‘我们’过成习惯
+          </li>
+          <li data-story="以后也要一起收集：旅行、晚餐、合影、和好多好多平凡的快乐。">
+            2024-∞ · 未来进行时
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 今天的温柔补给 -->
+    <section class="section">
+      <div class="section-title">
+        <span class="heart-icon"></span>
+        <span>今天的温柔补给</span>
+      </div>
+      <div class="card">
+        <div class="actions">
+          <button class="secondary" id="btnHug">给你一个抱抱</button>
+          <button class="secondary" id="btnPraise">给你一句夸夸</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 我们的瞬间 -->
+    <section class="section">
+      <div class="section-title">
+        <span class="heart-icon"></span>
+        <span>我们的瞬间</span>
+      </div>
+      <div class="card">
+        <div class="avatars">
+          <div class="photo">
+            <img src="xucong.jpg" alt="徐聪">
+            <div class="cap">徐聪</div>
+          </div>
+          <div class="photo">
+            <img src="jmj.jpg" alt="江敏娇">
+            <div class="cap">江敏娇</div>
+          </div>
+        </div>
+
+        <div class="gallery">
+          <div class="photo">
+            <img src="photo1.jpg" alt="我们的照片1">
+            <div class="cap">那天的风很温柔</div>
+          </div>
+          <div class="photo">
+            <img src="photo2.jpg" alt="我们的照片2">
+            <div class="cap">你的笑我会记很久</div>
+          </div>
+          <div class="photo">
+            <img src="photo3.jpg" alt="我们的照片3">
+            <div class="cap">小确幸永远不过期</div>
+          </div>
+          <div class="photo">
+            <img src="photo4.jpg" alt="我们的照片4">
+            <div class="cap">你在就是风景</div>
+          </div>
+          <div class="photo">
+            <img src="photo5.jpg" alt="我们的照片5">
+            <div class="cap">日常也像旅行</div>
+          </div>
+          <div class="photo">
+            <img src="photo6.jpg" alt="我们的照片6">
+            <div class="cap">以后也要合影</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 心动小测验 -->
+    <section class="section">
+      <div class="section-title">
+        <span class="heart-icon"></span>
+        <span>心动小测验</span>
+      </div>
+      <div class="card">
+        <div class="subtitle" style="margin-bottom:12px;">
+          这不是考试，是我想用可爱的方法再确认一次：我们很合拍。
+        </div>
+
+        <div id="quiz">
+          <div class="card" style="padding:14px; margin-bottom:10px;">
+            <strong>1) 我最想和你一起做的事是？</strong>
+            <div class="actions" style="justify-content:flex-start; margin-top:10px;">
+              <button class="secondary quiz-btn" data-ok="0">认真旅行</button>
+              <button class="secondary quiz-btn" data-ok="1">把日常过成约会</button>
+              <button class="secondary quiz-btn" data-ok="0">吃遍菜单</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding:14px; margin-bottom:10px;">
+            <strong>2) 你不开心时我该先做什么？</strong>
+            <div class="actions" style="justify-content:flex-start; margin-top:10px;">
+              <button class="secondary quiz-btn" data-ok="1">先抱抱你</button>
+              <button class="secondary quiz-btn" data-ok="0">先讲道理</button>
+              <button class="secondary quiz-btn" data-ok="0">先装作没看见</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding:14px;">
+            <strong>3) 2016年9月对我们意味着？</strong>
+            <div class="actions" style="justify-content:flex-start; margin-top:10px;">
+              <button class="secondary quiz-btn" data-ok="1">故事起点</button>
+              <button class="secondary quiz-btn" data-ok="0">普通月份</button>
+              <button class="secondary quiz-btn" data-ok="0">随便写的日期</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 小小约定 -->
+    <section class="section">
+      <div class="section-title">
+        <span class="heart-icon"></span>
+        <span>小小约定</span>
+      </div>
+      <div class="card">
+        <ul class="list">
+          <li>一起去一个你一直想去的地方。</li>
+          <li>每个月至少有一次认真约会。</li>
+          <li>你委屈的时候，我要比道理先抱你。</li>
+          <li>把“我们”这件事，慢慢变得更稳更甜。</li>
+          <li>从 2016 年 9 月开始，把余生都写成“我们”。</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      这个小站由徐聪悄悄准备，只想让江敏娇开心一点点 ❤️
+    </footer>
+  </div>
+
+  <!-- 弹窗 -->
+  <div class="modal" id="modal">
+    <div class="card modal-card">
+      <div class="badge" style="justify-content:center; margin: 0 auto 10px;">
+        <span class="badge-dot"></span> 隐藏彩蛋
+      </div>
+      <div class="modal-title" id="modalTitle">给你一颗小心心</div>
+      <p class="modal-text" id="modalText"></p>
+      <div class="actions">
+        <button id="btnClose">我收下啦</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* --------------- 基本信息 --------------- */
+    const MY_NAME = "徐聪";
+    const GIRLFRIEND_NAME = "江敏娇";
+    const MAIN_TITLE = `${MY_NAME} ❤️ ${GIRLFRIEND_NAME}`;
+
+    // 从 2016 年 9 月开始
+    // 若有精确日期（如 2016-09-18），改这里即可
+    const START_DATE = new Date(2016, 8, 1, 0, 0, 0); // 2016-09-01，注意月份 8 = 9月
+
+    const SURPRISE_TEXTS = [
+      `${GIRLFRIEND_NAME}，今天也要记得：你超级可爱。`,
+      `如果你累了，就把烦恼丢给我。——${MY_NAME}`,
+      `我喜欢你这件事，长期有效，自动续费。`,
+      `你不需要很完美，你只需要是你。`,
+      `想你这件事，已经成为我的日常。`
+    ];
+
+    const QUOTES = [
+      "你不需要很努力就值得被爱。",
+      "我喜欢你这件事，是长期有效、自动续费。",
+      "你笑一下，我今天就很难不开心。",
+      "我想把所有‘以后’都写成‘我们’。",
+      "你是我最温柔的确定。"
+    ];
+    /* -------------------------------------- */
+
+    // 打字机标题
+    const titleEl = document.getElementById("titleType");
+    function typeTitle(text){
+      let i = 0;
+      titleEl.textContent = "";
+      const timer = setInterval(() => {
+        titleEl.textContent = text.slice(0, i++);
+        if(i > text.length) clearInterval(timer);
+      }, 80);
+    }
+    typeTitle(MAIN_TITLE);
+
+    // 纪念日计时
+    const startDate = START_DATE instanceof Date ? START_DATE : new Date(START_DATE);
+    const startDateTextEl = document.getElementById("startDateText");
+
+    function fmtDate(d){
+      const y = d.getFullYear();
+      const m = String(d.getMonth()+1).padStart(2,"0");
+      const day = String(d.getDate()).padStart(2,"0");
+      return `${y}-${m}-${day}`;
+    }
+    startDateTextEl.textContent = fmtDate(startDate);
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function updateCounter(){
+      const now = new Date();
+      let diff = Math.max(0, now - startDate);
+      const sec = Math.floor(diff / 1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const minutes = Math.floor((sec % 3600) / 60);
+      const seconds = sec % 60;
+
+      daysEl.textContent = days;
+      hoursEl.textContent = hours;
+      minutesEl.textContent = minutes;
+      secondsEl.textContent = seconds;
+    }
+    updateCounter();
+    setInterval(updateCounter, 1000);
+
+    // 爱心生成
+    const heartsWrap = document.getElementById("hearts");
+    function createHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      const size = 8 + Math.random() * 14;
+      h.style.width = size + "px";
+      h.style.height = size + "px";
+
+      const left = Math.random() * 100;
+      h.style.left = left + "vw";
+      h.style.bottom = "-20px";
+
+      const hueShift = Math.random() * 12 - 6;
+      const base1 = `hsl(${335 + hueShift}, 90%, 70%)`;
+      const base2 = `hsl(${350 + hueShift}, 95%, 78%)`;
+      h.style.background = `linear-gradient(135deg, ${base1}, ${base2})`;
+
+      const duration = 6 + Math.random() * 6;
+      h.style.animationDuration = duration + "s";
+
+      heartsWrap.appendChild(h);
+      h.addEventListener("animationend", () => h.remove());
+    }
+
+    // 默认爱心雨
+    setInterval(() => {
+      createHeart();
+      if(Math.random() < 0.35) createHeart();
+    }, 420);
+
+    // 复用的弹窗
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+    const btnClose = document.getElementById("btnClose");
+
+    btnClose.addEventListener("click", () => modal.classList.remove("show"));
+    modal.addEventListener("click", (e) => {
+      if(e.target === modal) modal.classList.remove("show");
+    });
+
+    // 顶部惊喜
+    const btnSurprise = document.getElementById("btnSurprise");
+    btnSurprise.addEventListener("click", () => {
+      modalTitle.textContent = `给 ${GIRLFRIEND_NAME} 的小惊喜`;
+      modalText.textContent = SURPRISE_TEXTS[Math.floor(Math.random()*SURPRISE_TEXTS.length)];
+      modal.classList.add("show");
+      for(let i=0;i<12;i++) setTimeout(createHeart, i*40);
+    });
+
+    // 爱心加倍
+    const btnMoreHearts = document.getElementById("btnMoreHearts");
+    btnMoreHearts.addEventListener("click", () => {
+      let burst = 0;
+      const burstTimer = setInterval(() => {
+        for(let i=0;i<4;i++) createHeart();
+        burst++;
+        if(burst > 8) clearInterval(burstTimer);
+      }, 120);
+    });
+
+    // 抽一句
+    const btnQuote = document.getElementById("btnQuote");
+    btnQuote.addEventListener("click", () => {
+      const q = QUOTES[Math.floor(Math.random()*QUOTES.length)];
+      modalTitle.textContent = "给你一句小甜";
+      modalText.textContent = q;
+      modal.classList.add("show");
+      for(let i=0;i<8;i++) setTimeout(createHeart, i*45);
+    });
+
+    // 我们的故事点击
+    const storyList = document.getElementById("storyList");
+    storyList.addEventListener("click", (e) => {
+      const li = e.target.closest("li");
+      if(!li) return;
+      const text = li.getAttribute("data-story");
+      if(!text) return;
+
+      modalTitle.textContent = "我们的故事";
+      modalText.textContent = text;
+      modal.classList.add("show");
+      for(let i=0;i<10;i++) setTimeout(createHeart, i*35);
+    });
+
+    // 今日抱抱/夸夸
+    const HUGS = [
+      "我在呢。",
+      "不想说也没关系，我先抱住你。",
+      "今天辛苦了，剩下的交给明天。",
+      "你已经做得很好了。"
+    ];
+    const PRAISES = [
+      "你认真生活的样子特别迷人。",
+      "你的温柔很有力量。",
+      "你不是‘还可以’，你是‘很特别’。",
+      "你一笑，我就觉得全世界都顺了一点。"
+    ];
+
+    document.getElementById("btnHug").addEventListener("click", () => {
+      modalTitle.textContent = "抱抱到账";
+      modalText.textContent = HUGS[Math.floor(Math.random()*HUGS.length)];
+      modal.classList.add("show");
+      for(let i=0;i<10;i++) setTimeout(createHeart, i*40);
+    });
+
+    document.getElementById("btnPraise").addEventListener("click", () => {
+      modalTitle.textContent = "夸夸时间";
+      modalText.textContent = PRAISES[Math.floor(Math.random()*PRAISES.length)];
+      modal.classList.add("show");
+      for(let i=0;i<10;i++) setTimeout(createHeart, i*40);
+    });
+
+    // 心动小测验
+    const quiz = document.getElementById("quiz");
+    quiz.addEventListener("click", (e) => {
+      const btn = e.target.closest(".quiz-btn");
+      if(!btn) return;
+
+      const ok = btn.getAttribute("data-ok") === "1";
+      modalTitle.textContent = ok ? "答对啦！" : "也很可爱";
+      modalText.textContent = ok
+        ? "你就是很懂‘我们’的人。奖励你一场爱心暴击。"
+        : "没关系，这题我可以用一整辈子慢慢讲给你听。";
+
+      modal.classList.add("show");
+      const n = ok ? 16 : 8;
+      for(let i=0;i<n;i++) setTimeout(createHeart, i*30);
+    });
+for(let i=0;i<10;i++) setTimeout(createHeart, i*35);
+        }else{
+          loveAudio.pause();
+        }
+      }catch(e){
+        modalTitle.textContent = "提示";
+        modalText.textContent = "我好像还没找到音乐文件～请确认已上传 love-song.mp3 到仓库根目录。";
+        modal.classList.add("show");
+      }
+    });
+  
+    // ==============================
+    // 自动播放（无按钮版）
+    // ==============================
+    const loveAudio = document.getElementById("loveAudio");
+
+    async function tryAutoPlay(){
+      if(!loveAudio) return;
+      try{
+        await loveAudio.play();
+      }catch(e){
+        // 可能被浏览器策略拦截：等待一次任意用户交互后再尝试
+      }
+    }
+
+    // 页面加载尝试一次
+    document.addEventListener("DOMContentLoaded", tryAutoPlay);
+
+    // 任意一次用户交互后再试（不需要专门按钮）
+    const resumeEvents = ["click", "touchstart", "keydown", "scroll"];
+    const resumeOnce = async () => {
+      await tryAutoPlay();
+      resumeEvents.forEach(ev => window.removeEventListener(ev, resumeOnce, {passive:true}));
+    };
+    resumeEvents.forEach(ev => window.addEventListener(ev, resumeOnce, {passive:true}));
+
+  </script>
+</body>
+</html>
